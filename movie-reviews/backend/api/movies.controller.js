@@ -62,3 +62,94 @@ export default class MoviesController {
         }
     }
 }
+
+// Summary
+// This code defines a **controller class** (`MoviesController`) for handling API requests related to movies. It acts as the middle layer between incoming HTTP requests and the data access layer (`MoviesDAO`). Here’s a clear breakdown:
+
+// ---
+
+// ### 🔹 Overall Purpose
+
+// The controller exposes three API endpoints:
+
+// * Get a list of movies (with pagination and filters)
+// * Get a single movie by ID
+// * Get available movie ratings
+
+// ---
+
+// ### 🔹 1. `apiGetMovies`
+
+// Handles requests to fetch a **paginated list of movies**.
+
+// * Reads query parameters:
+
+//   * `moviesPerPage` → number of movies per page (default: 20)
+//   * `page` → page number (default: 0)
+//   * `rated` or `title` → optional filters
+// * Builds a `filters` object based on query input
+// * Calls `MoviesDAO.getMovies()` with:
+
+//   * filters
+//   * page
+//   * movies per page
+// * Returns a JSON response containing:
+
+//   * list of movies
+//   * current page
+//   * applied filters
+//   * number of entries per page
+//   * total number of results
+
+// 👉 In short: **Fetches and returns a filtered, paginated movie list.**
+
+// ---
+
+// ### 🔹 2. `apiGetMovieById`
+
+// Handles requests to fetch **a single movie by its ID**.
+
+// * Extracts `id` from request parameters
+// * Calls `MoviesDAO.getMovieById(id)`
+// * If no movie is found:
+
+//   * returns `404 Not Found`
+// * Otherwise:
+
+//   * returns the movie data as JSON
+// * Includes error handling:
+
+//   * logs errors
+//   * returns `500 Internal Server Error` if something goes wrong
+
+// 👉 In short: **Fetches one movie by ID with proper error handling.**
+
+// ---
+
+// ### 🔹 3. `apiGetRatings`
+
+// Handles requests to fetch **available movie ratings**.
+
+// * Calls `MoviesDAO.getRatings()`
+// * Returns the ratings as JSON
+// * Includes error handling similar to the previous method
+
+// 👉 In short: **Returns a list of distinct movie ratings.**
+
+// ---
+
+// ### 🔹 Key Design Notes
+
+// * Uses **async/await** for asynchronous database operations
+// * Separates concerns:
+
+//   * Controller → handles HTTP logic
+//   * DAO → handles database queries
+// * Provides **basic error handling** and **input parsing**
+
+// ---
+
+// ### ✅ One-line Summary
+
+// This controller manages movie-related API endpoints, enabling clients to retrieve paginated movie lists, individual movie details, and available ratings via a clean separation from the data access layer.
+
