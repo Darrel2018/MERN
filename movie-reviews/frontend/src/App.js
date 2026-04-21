@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { Switch, Route, Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
@@ -42,7 +41,7 @@ function App() {
                   <Link to={"/login"}>Login</Link>
                 )}
               </Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
@@ -52,7 +51,7 @@ function App() {
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -81,3 +80,37 @@ function App() {
 }
 
 export default App;
+
+// Summary
+// This code defines the main **App component** for a React-based movie review application. Here’s a clear summary of what it does:
+
+// The app uses **React Router** to handle navigation between different pages and **React Bootstrap** to style the interface, particularly the navigation bar.
+
+// At its core, the component manages a single piece of state: `user`. This represents whether someone is logged in. Two helper functions control this state:
+
+// * `login(user)` sets the current user
+// * `logout()` clears the user (logs them out)
+
+// The **navigation bar** at the top includes:
+
+// * A link to the Movies page
+// * A conditional Login/Logout option:
+
+//   * If a user is logged in → shows “Logout User”
+//   * If no user → shows a link to the Login page
+// * A dropdown menu with placeholder items
+
+// The **routing system** determines which component renders based on the URL:
+
+// * `/` or `/movies` → shows the movie list (`MoviesList`)
+// * `/movies/:id` → shows details for a specific movie (`Movie`)
+// * `/movies/:id/review` → allows adding a review (`AddReview`)
+// * `/login` → shows the login page (`Login`)
+
+// Some routes pass extra props:
+
+// * `user` is passed to `Movie` and `AddReview` so they can adjust behavior based on login status
+// * `login` is passed to `Login` so it can update the user state after authentication
+
+// In short, this file acts as the **central controller** of the app—handling navigation, user authentication state, and connecting different components together.
+
