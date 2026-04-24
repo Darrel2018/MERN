@@ -144,3 +144,57 @@ const MoviesList = props => {
 }
 
 export default MoviesList;
+
+
+// This code defines a React functional component called **`MoviesList`**, which displays a list of movies and allows users to search and filter them.
+
+// Here’s a clear breakdown of what it does:
+
+// **Core purpose:**
+// It fetches movie data from an external service and renders it in a grid layout, with options to search by title or filter by rating.
+
+// **State management:**
+// The component uses React hooks (`useState`) to manage:
+
+// * `movies`: the list of movies to display
+// * `searchTitle`: the current text input for title search
+// * `searchRating`: the selected rating filter
+// * `ratings`: available rating options (default includes “All Ratings”)
+
+// **Data fetching:**
+// When the component mounts (`useEffect`):
+
+// * `retrieveMovies()` fetches all movies from `MovieDataService`
+// * `retrieveRatings()` fetches available ratings and prepends “All Ratings”
+
+// **Search functionality:**
+
+// * `find(query, by)`: generic search function that queries the API by title or rating
+// * `findByTitle()`: searches movies by title input
+// * `findByRating()`: filters movies by selected rating (or reloads all if “All Ratings” is selected)
+
+// **User input handling:**
+
+// * `onChangeSearchTitle`: updates title input state
+// * `onChangeSearchRating`: updates selected rating
+
+// **UI structure (using React Bootstrap):**
+
+// * A form with:
+
+//   * Text input for title search
+//   * Dropdown for rating selection
+//   * Buttons to trigger searches
+// * A responsive grid (`Row` + `Col`) displaying movie cards
+
+// **Movie display:**
+// Each movie is shown in a card with:
+
+// * Poster image
+// * Title
+// * Rating
+// * Plot summary
+// * A link to view detailed reviews (`/movies/{id}`)
+
+// **In short:**
+// This component is a searchable movie browser that pulls data from an API, lets users filter results, and presents them in a clean card-based layout.
