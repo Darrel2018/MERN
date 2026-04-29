@@ -31,6 +31,21 @@ const Movie = (props) => {
             });
     };
 
+    const deleteReview = (reviewId, index) => {
+        MovieDataService.deleteReview(reviewId, props.user.id)
+            .then(response => {
+                setMovie((prevState) => {
+                    prevState.reviews.splice(index, 1)
+                    return ({
+                        ...prevState
+                    })
+                })
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+
     useEffect(() => {
         getMovie(id);
     }, [id]);
@@ -85,7 +100,9 @@ const Movie = (props) => {
                                                     </Link>
                                                 </Col>
                                                 <Col>
-                                                    <Button variant="link">Delete</Button>
+                                                    <Button variant="link" onClick={() => deleteReview(review._id, index)}>
+                                                        Delete
+                                                    </Button>
                                                 </Col>
                                             </Row>
                                         )}
