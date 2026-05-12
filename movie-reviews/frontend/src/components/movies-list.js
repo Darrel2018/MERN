@@ -15,15 +15,19 @@ const MoviesList = props => {
     const [searchRating, setSearchRating] = useState("");
     const [ratings, setRatings] = useState(["All Ratings"]);
 
+    // this
     const [currentPage, setCurrentPage] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(0);
 
+    // this
     const [currentSearchMode, setCurrentSearchMode] = useState("");
 
+    // this
     useEffect(() => {
         setCurrentPage(0);
     }, [currentSearchMode]);
 
+    // this
     useEffect(() => {
         retrieveMovies();
         retrieveRatings();
@@ -48,6 +52,7 @@ const MoviesList = props => {
             .then(response => {
                 console.log(response.data);
                 setMovies(response.data.movies);
+                // here
                 setCurrentPage(response.data.page);
                 setEntriesPerPage(response.data.entries_per_page);
             })
@@ -165,6 +170,7 @@ const MoviesList = props => {
                         )
                     })}
                 </Row>
+                {/* here */}
                 <br />
                 Showing page: {currentPage}.
                 <Button
@@ -181,55 +187,79 @@ const MoviesList = props => {
 export default MoviesList;
 
 
-// This code defines a React functional component called **`MoviesList`**, which displays a list of movies and allows users to search and filter them.
+// This React component, `MoviesList`, is responsible for displaying a list of movies with search and pagination functionality. It uses React Hooks (`useState`, `useEffect`) to manage state and side effects, along with Bootstrap components for styling.
 
-// Here’s a clear breakdown of what it does:
+// ### Key Features
 
-// **Core purpose:**
-// It fetches movie data from an external service and renders it in a grid layout, with options to search by title or filter by rating.
+// * **Movie Retrieval**
 
-// **State management:**
-// The component uses React hooks (`useState`) to manage:
+//   * Fetches movies from `MovieDataService`.
+//   * Loads movie data when the component first mounts.
+//   * Supports pagination by retrieving additional pages of results.
 
-// * `movies`: the list of movies to display
-// * `searchTitle`: the current text input for title search
-// * `searchRating`: the selected rating filter
-// * `ratings`: available rating options (default includes “All Ratings”)
+// * **Search Functionality**
 
-// **Data fetching:**
-// When the component mounts (`useEffect`):
+//   * Users can search movies:
 
-// * `retrieveMovies()` fetches all movies from `MovieDataService`
-// * `retrieveRatings()` fetches available ratings and prepends “All Ratings”
+//     * By **title**
+//     * By **rating**
+//   * Search mode is tracked to determine which query should be used when changing pages.
 
-// **Search functionality:**
+// * **Ratings Dropdown**
 
-// * `find(query, by)`: generic search function that queries the API by title or rating
-// * `findByTitle()`: searches movies by title input
-// * `findByRating()`: filters movies by selected rating (or reloads all if “All Ratings” is selected)
+//   * Retrieves available movie ratings dynamically.
+//   * Includes a default `"All Ratings"` option.
 
-// **User input handling:**
+// * **Pagination**
 
-// * `onChangeSearchTitle`: updates title input state
-// * `onChangeSearchRating`: updates selected rating
+//   * Tracks:
 
-// **UI structure (using React Bootstrap):**
+//     * Current page
+//     * Number of entries per page
+//   * Clicking “Get next results” loads the next page while maintaining the current search filter.
 
-// * A form with:
+// * **Movie Display**
 
-//   * Text input for title search
-//   * Dropdown for rating selection
-//   * Buttons to trigger searches
-// * A responsive grid (`Row` + `Col`) displaying movie cards
+//   * Movies are displayed using Bootstrap cards.
+//   * Each card shows:
 
-// **Movie display:**
-// Each movie is shown in a card with:
+//     * Poster image
+//     * Title
+//     * Rating
+//     * Plot summary
+//     * Link to reviews page
 
-// * Poster image
-// * Title
-// * Rating
-// * Plot summary
-// * A link to view detailed reviews (`/movies/{id}`)
+// ### State Variables
 
-// **In short:**
-// This component is a searchable movie browser that pulls data from an API, lets users filter results, and presents them in a clean card-based layout.
+// * `movies` → stores movie list
+// * `searchTitle` → stores title search input
+// * `searchRating` → stores selected rating
+// * `ratings` → stores available rating options
+// * `currentPage` → tracks current pagination page
+// * `entriesPerPage` → tracks page size
+// * `currentSearchMode` → tracks active search type
+
+// ### Important Logic
+
+// * `useEffect()` hooks:
+
+//   * Load movies and ratings on startup.
+//   * Reload results whenever the page changes.
+//   * Reset page number when switching search modes.
+
+// * `find()`:
+
+//   * Generic search helper used for title and rating searches.
+
+// * `findByTitle()` and `findByRating()`:
+
+//   * Apply filters and update the current search mode.
+
+// ### Technologies Used
+
+// * React
+// * React Router (`Link`)
+// * React Bootstrap
+// * External API service (`MovieDataService`)
+
+// Overall, this component acts as the main movie browsing page of the application, combining data fetching, filtering, navigation, and pagination into a single UI.

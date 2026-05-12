@@ -30,7 +30,8 @@ const Movie = (props) => {
                 console.log(e);
             });
     };
-
+    
+    // this is new
     const deleteReview = (reviewId, index) => {
         MovieDataService.deleteReview(reviewId, props.user.id)
             .then(response => {
@@ -100,7 +101,7 @@ const Movie = (props) => {
                                                     </Link>
                                                 </Col>
                                                 <Col>
-                                                    <Button variant="link" onClick={() => deleteReview(review._id, index)}>
+                                                    <Button variant="link" onClick={() => deleteReview(review._id, index)}> 
                                                         Delete
                                                     </Button>
                                                 </Col>
