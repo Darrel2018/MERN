@@ -2,37 +2,37 @@ import axios from "axios";
 
 class MovieDataService {
 
-    getAll(page = 0) {
-        return axios.get(`http://localhost:5000/api/v1/movies?page=${page}`);
+    getAll(page = 0) {// REACT_APP_API_URL
+        return axios.get(`${process.env.REACT_APP_API_URL}/movies?page=${page}`);
     }
 
     get(id) {
-        return axios.get(`http://localhost:5000/api/v1/movies/id/${id}`);
+        return axios.get(`${process.env.REACT_APP_API_URL}/movies/id/${id}`);
     }
 
     find(query, by = "title", page = 0) {
         return axios.get(
-            `http://localhost:5000/api/v1/movies?${by}=${query}&page=${page}`
+            `${process.env.REACT_APP_API_URL}/movies?${by}=${query}&page=${page}`
         );
     }
 
     createReview(data) {
-        return axios.post("http://localhost:5000/api/v1/movies/review", data);
+        return axios.post(process.env.REACT_APP_API_URL + "/movies/review", data);
     }
 
     updateReview(data) {
-        return axios.put("http://localhost:5000/api/v1/movies/review", data);
+        return axios.put(process.env.REACT_APP_API_URL + "/movies/review", data);
     }
 
     deleteReview(id, userId) {
         return axios.delete(
-            "http://localhost:5000/api/v1/movies/review",
+            process.env.REACT_APP_API_URL + "/movies/review",
             { data: { review_id: id, user_id: userId } }
         );
     }
 
     getRatings() {
-        return axios.get("http://localhost:5000/api/v1/movies/ratings");
+        return axios.get(process.env.REACT_APP_API_URL + "/movies/ratings");
     }
 }
 
